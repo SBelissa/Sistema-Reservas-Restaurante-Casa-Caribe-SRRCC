@@ -1,0 +1,239 @@
+/* --- Base Styles & Reset --- */
+
+/* Reset universal y box-sizing para consistencia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333; /* Gris oscuro */
+    background-color: #f8f8f8; /* Fondo muy claro */
+}
+
+/* Contenedor principal para centrar el contenido */
+main {
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 0 20px; 
+}
+
+/* --- Títulos y Tipografía --- */
+
+h1, h2, h3 {
+    color: #8B4513; /* Marrón cálido */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.8em;
+    padding: 20px 0;
+    color: #fff; /* Títulos en el header son blancos */
+}
+
+h2 {
+    font-size: 2.2em;
+    margin-top: 30px;
+}
+
+p, ul, address {
+    margin-bottom: 10px;
+    text-align: justify; /* Justifica texto en secciones de contenido */
+}
+
+a {
+    color: #008080; /* Azul verdoso caribeño */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #005f5f;
+}
+
+/* --- Encabezado y Navegación --- */
+
+header {
+    background-color: #8B4513; 
+    color: #fff;
+    padding: 1.2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    text-align: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #FFD700; /* Dorado en hover */
+    border-bottom: 2px solid #FFD700;
+}
+
+/* --- Componentes Reutilizables (Botones y Secciones) --- */
+
+.button {
+    display: inline-block;
+    background-color: #FFD700; /* Dorado */
+    color: #8B4513; 
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; 
+    margin-top: 15px;
+}
+
+.button:hover {
+    background-color: #DAA520;
+    transform: translateY(-2px);
+}
+
+.social-login-btn {
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    display: block; 
+    width: 100%; 
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilo para las secciones de contenido */
+.section {
+    background-color: #fff;
+    padding: 30px; 
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Hero Section Specifics --- */
+#hero {
+    background-color: #008080; /* Teal Caribbean */
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    border-radius: 0; 
+    margin-top: 0;
+    box-shadow: none;
+}
+
+#hero h2 {
+    color: #fff;
+    font-size: 3.2em;
+    margin-bottom: 25px;
+}
+
+#hero p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+}
+
+/* --- Formulario y Entradas --- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.input label {
+    display: block; 
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input input[type="text"],
+.input input[type="email"],
+.input input[type="password"],
+.input input[type="tel"],
+.input select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input input:focus,
+.input select:focus {
+    border-color: #008080;
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.2);
+    outline: none;
+}
+
+.checkbox {
+    display: flex; 
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.forgot-password {
+    display: block; 
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.error {
+    background-color: #ffe0e0;
+    color: #c00; 
+    border: 1px solid #c00;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9em;
+    margin-top: 40px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (min-width: 768px) {
+    /* En pantallas medianas y grandes, alinea el registro y login en columnas */
+    #register, #login {
+        display: inline-block;
+        width: 48%; /* Casi la mitad del ancho */
+        margin-right: 1.5%;
+        vertical-align: top;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Casa Caribe - Inicio y Reservas</title>
+    <link rel="stylesheet" href="css/styles.css"> 
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a Restaurante Casa Caribe</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="reservations.html">Reservaciones</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Sabores auténticos del Caribe en Bogotá</h2>
+            <p>Descubre una experiencia culinaria única con nuestros platillos tradicionales y ambiente acogedor.</p>
+            <a href="reservations.html" class="button">¡Haz tu reserva ahora!</a>
+        </section>
+
+        <section id="register" class="section">
+            <h2>Regístrate</h2>
+            <form action="/register" method="post">
+                <div class="input">
+                    <label for="reg_name">Nombre y Apellido:</label>
+                    <input type="text" id="reg_name" name="name" required>
+                </div>
+                <div class="input">
+                    <label for="reg_email">Correo Electrónico:</label>
+                    <input type="email" id="reg_email" name="email" required>
+                </div>
+                <div class="input">
+                    <label for="reg_password">Contraseña:</label>
+                    <input type="password" id="reg_password" name="password" required>
+                </div>
+                <div class="input">
+                    <label for="reg_phone">Número de Teléfono:</label>
+                    <input type="tel" id="reg_phone" name="phone">
+                </div>
+                <button type="submit" class="button">Registrarse</button>
+            </form>
+            <div class="error" style="display:none;">Hubo un error en el registro.</div>
+        </section>
+
+        <section id="login" class="section">
+            <h2>Iniciar Sesión</h2>
+            <form action="/login" method="post">
+                <div class="input">
+                    <label for="login_identifier">Correo Electrónico:</label>
+                    <input type="text" id="login_identifier" name="loginIdentifier" required>
+                </div>
+                <div class="input">
+                    <label for="login_password">Contraseña:</label>
+                    <input type="password" id="login_password" name="loginPassword" required>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="remember_me" name="rememberMe">
+                    <label for="remember_me">Recordar mi contraseña</label>
+                </div>
+                <button type="submit" class="button">Iniciar Sesión</button>
+                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </form>
+            <div class="error" style="display:none;">Credenciales incorrectas.</div>
+
+            <h3>O Inicia Sesión con:</h3>
+            <div class="imagenes"> 
+                <button class="social-login-btn">Google</button>
+                <button class="social-login-btn">Facebook</button>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>Sobre Nosotros</h2>
+            <p>En Restaurante Casa Caribe, nos dedicamos a traer los vibrantes sabores del Caribe a tu mesa. Con ingredientes frescos y recetas ancestrales, cada plato cuenta una historia de tradición y pasión. Nuestro objetivo es ofrecerte una experiencia memorable que deleite tus sentidos y te transporte a las cálidas costas caribeñas.</p>
+        </section>
+
+        <section id="menu" class="section">
+            <h2>Nuestro Menú</h2>
+            <p>Explora nuestra variada selección de platillos:</p>
+            <ul>
+                <li>**Entradas:** Patacones con hogao, Arepitas de huevo, Ceviche de camarón.</li>
+                <li>**Platos Fuertes:** Pescado frito al estilo caribeño, Arroz con coco y camarones, Sancocho de pescado.</li>
+                <li>**Postres:** Cocada, Flán de caramelo.</li>
+            </ul>
+        </section>
+        
+        <section id="contact" class="section">
+            <h2>Contacto</h2>
+            <address>
+                <p>Dirección: Calle 85 #12-30, Bogotá, Colombia</p>
+                <p>Teléfono: <a href="tel:+5712345678">(+57) 1 234 5678</a></p>
+                <p>Email: <a href="mailto:info@casacaribe.com">info@casacaribe.com</a></p>
+            </address>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Restaurante Casa Caribe. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
