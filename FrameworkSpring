@@ -1,0 +1,90 @@
+*//Spring
+package com.casacaribe.reservas.service;
+
+import com.casacaribe.reservas.modelo.ReservaMesa;
+import com.casacaribe.reservas.repository.ReservaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Capa de Servicio: Implementa la lógica de negocio para las reservas.
+ * Sigue los principios de Inyección de Dependencias (@Autowired).
+ */
+@Service
+public class ReservaService {
+
+    // Nomenclatura de variable en camelCase
+    private final ReservaRepository reservaRepository;
+
+    @Autowired
+    public ReservaService(ReservaRepository reservaRepository) {
+        this.reservaRepository = reservaRepository;
+    }
+
+    // --- OPERACIONES CRUD ---
+
+    /**
+     * Crea una nueva reserva (C - Create).
+     * @param reserva Datos de la reserva a guardar.
+     * @return La reserva persistida, incluyendo el ID generado.
+     */
+    public ReservaMesa crearReserva(ReservaMesa reserva) {
+        // Lógica de negocio: establecer el estado inicial y validaciones
+        if (reserva.getEstado() == null || reserva.getEstado().isEmpty()) {
+            reserva.setEstado("Pendiente");
+        }
+        // Validación de capacidad (ejemplo simple)
+        if (reserva.getNumPersonas() < 1 || reserva.getNumPersonas() > 10) {
+            throw new IllegalArgumentException("El número de personas debe estar entre 1 y 10.");
+        }
+        return reservaRepository.save(reserva);
+    }
+
+    /**
+     * Consulta todas las reservas (R - Read).
+     * @return Lista de todas las reservas.
+     */
+    public List<ReservaMesa> obtenerTodas() {
+        return reservaRepository.findAll();
+    }
+
+    /**
+     * Consulta una reserva por su ID (R - Read).
+     * @param id ID de la reserva.
+     * @return Un Optional con la reserva, o vacío si no existe.
+     */
+    public Optional<ReservaMesa> obtenerPorId(Long id) {
+        return reservaRepository.findById(id);
+    }
+
+    /**
+     * Actualiza una reserva existente (U - Update).
+     * @param id ID de la reserva a actualizar.
+     * @param reservaActualizada Datos nuevos de la reserva.
+     * @return La reserva actualizada o null si no se encontró.
+     */
+    public ReservaMesa actualizarReserva(Long id, ReservaMesa reservaActualizada) {
+        return reservaRepository.findById(id)
+            .map(reservaExistente -> {
+                // Actualización de campos
+                reservaExistente.setFechaReserva(reservaActualizada.getFechaReserva());
+                reservaExistente.setHoraReserva(reservaActualizada.getHoraReserva());
+                reservaExistente.setNumPersonas(reservaActualizada.getNumPersonas());
+                reservaExistente.setEstado(reservaActualizada.getEstado());
+                // Nomenclatura de método en camelCase
+                return reservaRepository.save(reservaExistente); 
+            })
+            .orElse(null); // Retorna null si el ID no existe
+    }
+
+    /**
+     * Elimina una reserva por su ID (D - Delete).
+     * @param id ID de la reserva a eliminar.
+     */
+    public void eliminarReserva(Long id) {
+        reservaRepository.deleteById(id);
+    }
+}
