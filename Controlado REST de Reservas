@@ -1,0 +1,93 @@
+package com.casacaribe.reservas.controller;
+
+import com.casacaribe.reservas.modelo.ReservaMesa;
+import com.casacaribe.reservas.service.ReservaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * Controlador REST para la gestión de Reservas.
+ * Define los endpoints de la API RESTful para el módulo.
+ */
+@RestController
+@RequestMapping("/api/reservas") // Nomenclatura de paquete siguiendo estándares
+public class ReservaController {
+
+    private final ReservaService reservaService;
+
+    @Autowired
+    public ReservaController(ReservaService reservaService) {
+        this.reservaService = reservaService;
+    }
+
+    // --- ENDPOINTS CRUD ---
+
+    /**
+     * Endpoint para crear una nueva reserva (CREATE).
+     * URL: POST /api/reservas
+     */
+    @PostMapping
+    public ResponseEntity<ReservaMesa> crearReserva(@RequestBody ReservaMesa reserva) {
+        try {
+            ReservaMesa nuevaReserva = reservaService.crearReserva(reserva);
+            return new ResponseEntity<>(nuevaReserva, HttpStatus.CREATED); // Retorna 201
+        } catch (IllegalArgumentException e) {
+            // Manejo de error de validación
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // Retorna 400
+        }
+    }
+
+    /**
+     * Endpoint para obtener todas las reservas (READ ALL).
+     * URL: GET /api/reservas
+     */
+    @GetMapping
+    public ResponseEntity<List<ReservaMesa>> obtenerTodas() {
+        // Nomenclatura de método en camelCase
+        List<ReservaMesa> reservas = reservaService.obtenerTodas(); 
+        return new ResponseEntity<>(reservas, HttpStatus.OK); // Retorna 200
+    }
+
+    /**
+     * Endpoint para obtener una reserva por ID (READ ONE).
+     * URL: GET /api/reservas/{id}
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservaMesa> obtenerPorId(@PathVariable Long id) {
+        return reservaService.obtenerPorId(id)
+            .map(reserva -> new ResponseEntity<>(reserva, HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND)); // Retorna 404 si no existe
+    }
+
+    /**
+     * Endpoint para actualizar una reserva (UPDATE).
+     * URL: PUT /api/reservas/{id}
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservaMesa> actualizarReserva(@PathVariable Long id, @RequestBody ReservaMesa reserva) {
+        ReservaMesa reservaActualizada = reservaService.actualizarReserva(id, reserva);
+        if (reservaActualizada != null) {
+            return new ResponseEntity<>(reservaActualizada, HttpStatus.OK); // Retorna 200
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Retorna 404
+    }
+
+    /**
+     * Endpoint para eliminar una reserva (DELETE).
+     * URL: DELETE /api/reservas/{id}
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarReserva(@PathVariable Long id) {
+        try {
+            reservaService.eliminarReserva(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Retorna 204 (eliminación exitosa sin contenido)
+        } catch (Exception e) {
+            // En una aplicación real, se manejarían excepciones específicas
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+}
